@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang='de'><head><meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Pefkochori Packliste</title>
+<style>
+body{margin:0;font-family:-apple-system;background:linear-gradient(180deg,#1f3b5c,#6f8fb3);color:white}
+.header,.weather,.card{margin:16px;padding:18px;border-radius:24px}
+.weather{background:linear-gradient(180deg,#355c7d,#1f3b5c)}
+.card{background:#f9fbfd;color:#222}
+label{display:block;padding:8px;border-bottom:1px solid #eee}
+</style></head><body>
+<div class='header'><h1>🇬🇷 Pefkochori Packliste</h1><p>25.05–07.06 • 13 Tage</p></div>
+<div class='weather'><div id='temp' style='font-size:52px'>--°</div><div id='minmax'>Lädt Wetter...</div><div>🌙 🌅 ☀️ ☀️ ☀️ 🌤️ 🌙</div><p>0% Regen • Sommerwetter</p></div>
+<div class='card'><h2>💊 Medikamente</h2><label><input type='checkbox'>Jardiance 10 mg morgens</label><label><input type='checkbox'>Irbesartan 75 mg abends</label></div><div class='card'><h2>📄 Dokumente</h2><label><input type='checkbox'>Reisepass/Personalausweis</label><label><input type='checkbox'>Flugtickets / Boardingpass</label><label><input type='checkbox'>Hotelbuchung</label><label><input type='checkbox'>Krankenversicherungskarte</label><label><input type='checkbox'>Führerschein</label><label><input type='checkbox'>EC-/Kreditkarte</label><label><input type='checkbox'>Bargeld</label><label><input type='checkbox'>Handy + Ladegerät</label><label><input type='checkbox'>Powerbank</label><label><input type='checkbox'>Kopfhörer</label></div><div class='card'><h2>📱 Technik</h2><label><input type='checkbox'>Handy</label><label><input type='checkbox'>Ladekabel</label><label><input type='checkbox'>Mehrfachstecker</label><label><input type='checkbox'>Adapter</label><label><input type='checkbox'>Kamera optional</label><label><input type='checkbox'>E‑Book/Tablet</label></div><div class='card'><h2>🧴 Hygiene & Pflege</h2><label><input type='checkbox'>Zahnbürste</label><label><input type='checkbox'>Shampoo / Duschgel</label><label><input type='checkbox'>Deo</label><label><input type='checkbox'>Bürste</label><label><input type='checkbox'>Rasierer</label><label><input type='checkbox'>2x LSF50 200ml</label><label><input type='checkbox'>LSF30 200ml</label><label><input type='checkbox'>After Sun</label><label><input type='checkbox'>Lippenpflege</label><label><input type='checkbox'>Pflaster</label><label><input type='checkbox'>Mückenspray</label></div><div class='card'><h2>🏖️ Strand & Pool</h2><label><input type='checkbox'>Badetasche</label><label><input type='checkbox'>Strandtuch</label><label><input type='checkbox'>Sonnenbrille</label><label><input type='checkbox'>Flip‑Flops</label><label><input type='checkbox'>Wasserdichte Handyhülle</label><label><input type='checkbox'>Schnorchelset</label></div><div class='card'><h2>👕 Männer Kleidung</h2><label><input type='checkbox'>8‑10 T‑Shirts</label><label><input type='checkbox'>4‑5 Shorts</label><label><input type='checkbox'>1‑2 Hemden</label><label><input type='checkbox'>1 lange Hose</label><label><input type='checkbox'>1 Hoodie</label><label><input type='checkbox'>Unterwäsche 13 Tage</label><label><input type='checkbox'>Schlafsachen</label><label><input type='checkbox'>2‑3 Badehosen</label><label><input type='checkbox'>Sneaker</label><label><input type='checkbox'>Cap</label><label><input type='checkbox'>Gürtel</label><label><input type='checkbox'>Rucksack/Bauchtasche</label></div><script>
+const KEY='pef_pack';
+function save(){localStorage.setItem(KEY,JSON.stringify([...document.querySelectorAll('input')].map(x=>x.checked)))}
+window.onload=()=>{let s=JSON.parse(localStorage.getItem(KEY)||'[]');document.querySelectorAll('input').forEach((b,i)=>{b.checked=s[i]||false;b.onchange=save})}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+async function w(){const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=39.99&longitude=23.61&current=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto');const d=await r.json();temp.innerText=Math.round(d.current.temperature_2m)+'°';minmax.innerText=Math.round(d.daily.temperature_2m_max[0])+'° / '+Math.round(d.daily.temperature_2m_min[0])+'°';}
+w();
+</script>
+<div class='card'><h2>🧢 Männer Extras</h2>
+<label><input type='checkbox'>Rasierer / Trimmer</label>
+<label><input type='checkbox'>Sonnenbrille</label>
+<label><input type='checkbox'>Flip-Flops / Sandalen</label>
+<label><input type='checkbox'>Kleiner Rucksack oder Bauchtasche</label>
+</div>
+
+<div class='card'><h2>☀️ Sonnencreme Empfehlung (2 Personen)</h2>
+<label><input type='checkbox'>2× LSF50 à 200 ml</label>
+<label><input type='checkbox'>1× LSF30 à 200 ml</label>
+<label><input type='checkbox'>After Sun</label>
+</div>
+</body></html>
