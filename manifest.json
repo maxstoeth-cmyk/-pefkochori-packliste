@@ -1,0 +1,15 @@
+{
+  "name": "🇬🇷 Pefkochori Packliste",
+  "short_name": "Packliste",
+  "display": "standalone",
+  "start_url": "/-pefkochori-packliste/",
+  "theme_color": "#1f3b5c",
+  "background_color": "#1f3b5c",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
