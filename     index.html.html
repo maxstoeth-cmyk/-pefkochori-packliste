@@ -1,0 +1,46 @@
+
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<style>body{font-family:-apple-system;background:linear-gradient(#1f3b5c,#6f8fb3);color:white}.card{background:#f9fbfd;color:#222;margin:14px;padding:16px;border-radius:20px}label{display:block;padding:8px}</style></head><body>
+
+<div class='card' style="background:linear-gradient(180deg,#355c7d,#1f3b5c);color:white;border-radius:28px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div>
+<div style="font-size:18px;opacity:.9">📍 Pefkochori</div>
+<div style="font-size:52px;font-weight:700"><span id='liveTemp'>28°</span></div>
+<div style="font-size:18px">🌤️ Live Wetter • <span id='liveMinMax'>28° / 13°</span></div>
+</div>
+<div style="font-size:60px">🌤️</div>
+</div>
+
+<div style="margin-top:18px;background:rgba(255,255,255,.08);padding:14px;border-radius:18px">
+<div style="display:flex;justify-content:space-between;font-size:26px">
+<span>🌙</span><span>🌅</span><span>☀️</span><span>☀️</span><span>☀️</span><span>🌤️</span><span>🌙</span>
+</div>
+<div style="height:6px;background:linear-gradient(90deg,#ffd54f,#ffb300);border-radius:10px;margin-top:10px"></div>
+</div>
+
+<div style="display:flex;gap:12px;margin-top:18px">
+<div style="flex:1;background:rgba(255,255,255,.08);padding:12px;border-radius:16px">🌧️ 0% Regen</div>
+<div style="flex:1;background:rgba(255,255,255,.08);padding:12px;border-radius:16px">🌙 18–19°C abends</div>
+</div>
+
+<p style="margin-top:16px">👕 Empfehlung: Sommerkleidung + Hoodie für abends</p>
+</div>
+<div class='card'><h2>💊 Medikamente</h2><label><input type='checkbox'>Jardiance 10 mg</label><label><input type='checkbox'>Irbesartan 75 mg</label></div>
+<div class='card'><h2>📄 Dokumente</h2><label><input type='checkbox'>Reisepass oder Personalausweis</label><label><input type='checkbox'>Flugtickets / Boardingpass</label><label><input type='checkbox'>Hotelbuchung</label><label><input type='checkbox'>Krankenversicherungskarte</label><label><input type='checkbox'>Führerschein</label><label><input type='checkbox'>EC-/Kreditkarte</label><label><input type='checkbox'>Etwas Bargeld</label><label><input type='checkbox'>Handy + Ladegerät</label><label><input type='checkbox'>Powerbank</label><label><input type='checkbox'>Kopfhörer</label></div><div class='card'><h2>📱 Technik</h2><label><input type='checkbox'>Handy</label><label><input type='checkbox'>Ladekabel</label><label><input type='checkbox'>Mehrfachstecker</label><label><input type='checkbox'>Adapter</label><label><input type='checkbox'>Kamera (optional)</label><label><input type='checkbox'>E-Book/Tablet (optional)</label></div><div class='card'><h2>🧴 Hygiene & Pflege</h2><label><input type='checkbox'>Zahnbürste + Zahnpasta</label><label><input type='checkbox'>Shampoo / Duschgel</label><label><input type='checkbox'>Deo</label><label><input type='checkbox'>Bürste/Kamm</label><label><input type='checkbox'>Rasierer</label><label><input type='checkbox'>Sonnencreme</label><label><input type='checkbox'>After Sun</label><label><input type='checkbox'>Lippenpflege</label><label><input type='checkbox'>Pflaster</label><label><input type='checkbox'>Mückenspray</label></div><div class='card'><h2>🏖️ Strand</h2><label><input type='checkbox'>Badetasche</label><label><input type='checkbox'>Strandtuch</label><label><input type='checkbox'>Sonnenbrille</label><label><input type='checkbox'>Flip-Flops</label><label><input type='checkbox'>Wasserdichte Handyhülle</label><label><input type='checkbox'>Schnorchelset</label></div><div class='card'><h2>👕 Männer</h2><label><input type='checkbox'>8–10 T-Shirts/Hemden</label><label><input type='checkbox'>4–5 Shorts</label><label><input type='checkbox'>1–2 leichte Hemden</label><label><input type='checkbox'>1 lange Hose</label><label><input type='checkbox'>1 Jacke</label><label><input type='checkbox'>Unterwäsche 13 Tage</label><label><input type='checkbox'>Schlafsachen</label><label><input type='checkbox'>2–3 Badehosen</label><label><input type='checkbox'>Sneaker</label><label><input type='checkbox'>Flip-Flops</label><label><input type='checkbox'>Rasierer/Trimmer</label><label><input type='checkbox'>Cap</label><label><input type='checkbox'>Gürtel</label><label><input type='checkbox'>Kleiner Rucksack</label></div>
+<script>
+async function loadWeather(){
+try{
+const lat=39.99, lon=23.61;
+const res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`);
+const data=await res.json();
+
+document.getElementById("liveTemp").innerText=Math.round(data.current.temperature_2m)+"°";
+document.getElementById("liveMinMax").innerText=
+Math.round(data.daily.temperature_2m_max[0])+"° / "+
+Math.round(data.daily.temperature_2m_min[0])+"°";
+}catch(e){}
+}
+loadWeather();
+</script>
+</body></html>
